@@ -34,8 +34,8 @@ const clients = {
 }
 
 const users = {
-	user1: "password1",
-	john: "appleseed",
+	user1: "jhon",
+	password: "appleseed",
 }
 
 const requests = {}
@@ -75,7 +75,11 @@ app.get("/authorize", (req, res) => {
 
 app.post("/approve", (req, res) => {
 	const { userName, password, requestId } = req.body
-	if (!userName || users[userName] !== password) {
+	if (!userName && users.user1 !== userName) {
+		res.status(401).send("Error: user not authorized")
+		return
+	}
+	if (!password && users.password !== password) {
 		res.status(401).send("Error: user not authorized")
 		return
 	}
