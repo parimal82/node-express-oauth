@@ -28,9 +28,6 @@ app.use(timeout)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-/*
-Your code here
-*/
 app.get("/user-info", (req, res) => {
 	if (!req.headers.authorization) {
 		res.status(401).send("Error: client unauthorized")
@@ -59,7 +56,7 @@ app.get("/user-info", (req, res) => {
 		userWithRestrictedFields[field] = user[field]
 	}
 
-	res.json(userWithRestrictedFields)
+	res.status(200).json(userWithRestrictedFields)
 })
 
 const server = app.listen(config.port, "localhost", function () {
