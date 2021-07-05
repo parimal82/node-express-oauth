@@ -31,7 +31,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get("/user-info", (req, res) => {
 	if (!req.headers.authorization) {
 		res.status(401).send("Error: client unauthorized")
-		return
 	}
 	const authToken = req.headers.authorization.slice("bearer ".length)
 	let userInfo = null
@@ -41,11 +40,9 @@ app.get("/user-info", (req, res) => {
 		})
 	} catch (e) {
 		res.status(401).send("Error: client unauthorized")
-		return
 	}
 	if (!userInfo) {
 		res.status(401).send("Error: client unauthorized")
-		return
 	}
 
 	const user = users[userInfo.userName]
